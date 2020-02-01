@@ -4,8 +4,8 @@ import hashlib
 
 from django.contrib.auth import models
 
-from auditlog.models import AuditlogHistoryField
-from auditlog.registry import auditlog
+# from auditlog.models import AuditlogHistoryField dj3
+# from auditlog.registry import auditlog dj3
 from model_utils.models import TimeStampedModel
 
 
@@ -18,7 +18,7 @@ class Usuario(TimeStampedModel, models.AbstractUser):
         verbose_name = 'Usuário'
         db_table = 'administrativo\".\"usuarios_usuario'
 
-    history = AuditlogHistoryField()
+    # history = AuditlogHistoryField() dj3
 
     def gravatar_url(self):
         """Obtém a url gravatar em função do email fornecido."""
@@ -26,4 +26,4 @@ class Usuario(TimeStampedModel, models.AbstractUser):
         return '//www.gravatar.com/avatar/{}'.format(email_hash)
 
 
-auditlog.register(Usuario)
+# auditlog.register(Usuario) dj3

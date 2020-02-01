@@ -55,10 +55,10 @@ THIRD_PARTY_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'auditlog',
+    # 'auditlog', não compatível com dj3
     'django_celery_results',
     'pipeline',
-    'post_office',
+    # 'post_office', dj3
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
@@ -79,7 +79,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'auditlog.middleware.AuditlogMiddleware',
+    # 'auditlog.middleware.AuditlogMiddleware', dj3
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
