@@ -55,10 +55,10 @@ THIRD_PARTY_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    # 'auditlog', não compatível com dj3
+    # dj3 'auditlog',
     'django_celery_results',
     'pipeline',
-    # 'post_office', dj3
+    'post_office',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
@@ -66,9 +66,9 @@ THIRD_PARTY_APPS = [
 ]
 
 PROJECT_APPS = [
-    'administrativo',
-    'administrativo.usuarios',
-    'arquitetura',
+    '{{ project_name }}.apps.administrativo',
+    '{{ project_name }}.apps.administrativo.usuarios',
+    '{{ project_name }}.apps.arquitetura',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
@@ -79,7 +79,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    # 'auditlog.middleware.AuditlogMiddleware', dj3
+    # dj3 'auditlog.middleware.AuditlogMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -215,7 +215,8 @@ REST_FRAMEWORK = {
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',
                                 'rest_framework.filters.SearchFilter',
-                                'rest_framework.filters.OrderingFilter')
+                                'rest_framework.filters.OrderingFilter'),
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
 }
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])

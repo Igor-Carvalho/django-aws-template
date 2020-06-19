@@ -2,7 +2,7 @@
 
 from rest_framework import routers
 
-from administrativo.usuarios.api import UsuarioViewSet
+from {{ project_name }}.apps.administrativo.usuarios.api import UsuarioViewSet
 
 router = routers.DefaultRouter()
 router.register('usuarios', UsuarioViewSet)
