@@ -170,7 +170,7 @@ PIPELINE['STYLESHEETS'] = {
 PIPELINE['COMPILERS'] = {
     'pipeline.compilers.es6.ES6Compiler'
 }
-PIPELINE['BABEL_ARGUMENTS'] = '--presets env'
+PIPELINE['BABEL_ARGUMENTS'] = '--presets @babel/env'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = root.path('media').root

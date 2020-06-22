@@ -19,22 +19,76 @@
 </head>
 <body>
   {% templatetag openblock %} block body {% templatetag closeblock %}
-    <div id="app">
-      <b-container fluid>
-        <b-row>
-          <h3>Home</h3>
-        </b-row>
-      </b-container>
+    <div id="app" class="container mt-3">
+      <validation-observer v-slot="form" ref="form">
+        <b-form>
+          <validation-provider v-slot="nome" rules="required">
+            <b-form-group>
+              <template slot="label">Nome <i class="fas fa-check-circle text-success" v-if="nome.valid"></i><i class="fas fa-times text-danger" v-if="nome.dirty && nome.invalid"></i></template>
+              <b-form-input v-model="pessoa.nome" ref="nome"></b-form-input>
+              <span class="text-danger">[[ nome.errors[0] ]]</span>
+            </b-form-group>
+          </validation-provider>
+
+          <validation-provider v-slot="idade" rules="required|numeric|min-value:15">
+            <b-form-group>
+              <template slot="label">Idade <i class="fas fa-check-circle text-success" v-if="idade.valid"></i><i class="fas fa-times text-danger" v-if="idade.dirty && idade.invalid"></i></template>
+              <b-form-input v-model="pessoa.idade"></b-form-input>
+              <span class="text-danger">[[ idade.errors[0] ]]</span>
+            </b-form-group>
+          </validation-provider>
+
+          <hr>
+          <b-button variant="primary" @click="enviar" :disabled="form.invalid">Enviar</b-button>
+        </b-form>
+      </validation-observer>
     </div>
   {% templatetag openblock %} endblock body {% templatetag closeblock %}
-
-  {% templatetag openblock %} block scripts {% templatetag closeblock %}{% templatetag openblock %} endblock scripts {% templatetag closeblock %}
 
   <script src="{% templatetag openblock %} static 'jquery/dist/jquery.min.js' {% templatetag closeblock %}"></script>
   <script src="{% templatetag openblock %} static 'axios/dist/axios.min.js' {% templatetag closeblock %}"></script>
   <script src="{% templatetag openblock %} static 'vue/dist/vue.min.js' {% templatetag closeblock %}"></script>
   <script src="{% templatetag openblock %} static 'bootstrap-vue/dist/bootstrap-vue.min.js' {% templatetag closeblock %}"></script>
+  <script src="{% templatetag openblock %} static 'vee-validate/dist/vee-validate.full.min.js' {% templatetag closeblock %}"></script>
 
   {% templatetag openblock %} javascript 'app' {% templatetag closeblock %}
+
+  {% templatetag openblock %} block scripts {% templatetag closeblock %}
+    <script>
+      new Vue({
+        el: '#app',
+        delimiters: ['[[', ']]'],
+        data() {
+          return {
+            pessoa: {
+              nome: '',
+              idade: ''
+            }
+          }
+        },
+        methods: {
+          enviar() {
+            console.log(this.pessoa)
+            this.reset()
+            this.$nextTick(() => {
+              this.$refs.form.reset()
+              this.$refs.nome.focus()
+            })
+          },
+          reset() {
+            this.pessoa = {
+              nome: '',
+              idade: ''
+            }
+          }
+        },
+        mounted() {
+          this.$nextTick(() => {
+            this.$refs.nome.focus()
+          })
+        }
+      })
+    </script>
+  {% templatetag openblock %} endblock scripts {% templatetag closeblock %}
 </body>
 </html>
