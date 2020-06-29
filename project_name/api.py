@@ -2,9 +2,9 @@
 
 from rest_framework import routers
 
-from {{ project_name }}.apps.administrativo.usuarios.api import UsuarioViewSet
+from {{ project_name }}.apps.administrativo.usuarios import api as usuarios_api
 
 router = routers.DefaultRouter()
-router.register('usuarios', UsuarioViewSet)
+router.register('usuarios', usuarios_api.UsuarioViewSet)
 
 urls = router.urls, '{{ project_name }}', 'v1'

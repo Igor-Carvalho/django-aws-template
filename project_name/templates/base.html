@@ -22,7 +22,7 @@
     <div id="app" class="container mt-3">
       <validation-observer v-slot="form" ref="form">
         <b-form>
-          <validation-provider v-slot="nome" rules="required">
+          <validation-provider v-slot="nome" rules="required" immediate>
             <b-form-group>
               <template slot="label">Nome <i class="fas fa-check-circle text-success" v-if="nome.valid"></i><i class="fas fa-times text-danger" v-if="nome.dirty && nome.invalid"></i></template>
               <b-form-input v-model="pessoa.nome" ref="nome"></b-form-input>
@@ -30,7 +30,7 @@
             </b-form-group>
           </validation-provider>
 
-          <validation-provider v-slot="idade" rules="required|numeric|min-value:15">
+          <validation-provider v-slot="idade" rules="required|numeric|min-value:15" immediate>
             <b-form-group>
               <template slot="label">Idade <i class="fas fa-check-circle text-success" v-if="idade.valid"></i><i class="fas fa-times text-danger" v-if="idade.dirty && idade.invalid"></i></template>
               <b-form-input v-model="pessoa.idade"></b-form-input>
